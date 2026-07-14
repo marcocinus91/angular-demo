@@ -1,0 +1,11 @@
+<div class="grid grid-cols-3 gap-4">
+    @for (todo of todos(); track todo.id) {
+        <div class="p-4 rounded-xl bg-blue-100">
+            <h3 class="font-semibold text-gray-800">{{ todo.title }}</h3>
+            <p class="text-sm text-gray-600 mt-1">{{ todo.description }}</p>
+            <span class="text-xs text-gray-500 mt-2 block">{{ todo.date }}</span>
+        </div>
+    } @empty {
+        <p class="text-gray-500">Nessun task presente</p>
+    }
+</div>
