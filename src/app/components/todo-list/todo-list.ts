@@ -15,15 +15,31 @@ export class TodoList {
   private todoService = inject(TodoService);
 
   activeTab = signal<Tab>('active');
+  searchQuery = signal('');
 
-  visibleTodos = computed(() =>
+  private tabFilteredTodos = computed(() =>
     this.activeTab() === 'active'
       ? this.todoService.activeTodos()
       : this.todoService.completedTodos(),
   );
 
+  visibleTodos = computed(() => {
+    const query = this.searchQuery().trim().toLowerCase();
+    const todos = this.tabFilteredTodos();
+
+    if (!query) return todos;
+
+    return todos.filter(
+      (t) => t.title.toLowerCase().includes(query) || t.description.toLowerCase().includes(query),
+    );
+  });
+
   setTab(tab: Tab): void {
     this.activeTab.set(tab);
+  }
+
+  onSearchChange(value: string): void {
+    this.searchQuery.set(value);
   }
 
   onToggle(id: string): void {
