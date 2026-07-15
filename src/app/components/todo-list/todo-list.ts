@@ -1,10 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { TodoService } from '../../services/todo.service';
-import { TodoCard } from "../todo-card/todo-card";
+import { TodoCard } from '../todo-card/todo-card';
+import { TodoForm } from '../todo-form/todo-form';
 
 @Component({
   selector: 'app-todo-list',
-  imports: [TodoCard],
+  imports: [TodoCard, TodoForm],
   templateUrl: './todo-list.html',
   styleUrl: './todo-list.css',
 })
@@ -18,6 +19,6 @@ export class TodoList {
   }
 
   onDelete(id: string): void {
-    this.todoService.remove(id)
+    this.todoService.remove(id);
   }
 }
