@@ -13,19 +13,17 @@
         </button>
     </div>
 
-    <input
-        type="text"
-        placeholder="Search List"
-        [value]="searchQuery()"
+    <input type="text" placeholder="Search List" [value]="searchQuery()"
         (input)="onSearchChange($any($event.target).value)"
-        class="px-3 py-1.5 border border-gray-300 rounded-lg text-sm w-64"
-    />
+        class="px-3 py-1.5 border border-gray-300 rounded-lg text-sm w-64" />
 </div>
 
 <div class="grid grid-cols-3 gap-4">
     @for (todo of visibleTodos(); track todo.id) {
     <app-todo-card [todo]="todo" (toggle)="onToggle($event)" (delete)="onDelete($event)" />
     } @empty {
-    <p class="text-gray-500">Nessun task presente</p>
+    <div class="col-span-3 flex flex-col items-center justify-center py-12 text-gray-400">
+        <p class="text-gray-500">Nessun task presente</p>
+    </div>
     }
 </div>
