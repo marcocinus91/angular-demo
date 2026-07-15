@@ -18,7 +18,7 @@ export class TodoList {
 
   visibleTodos = computed(() =>
     this.activeTab() === 'active'
-      ? this.todoService.activateTodos()
+      ? this.todoService.activeTodos()
       : this.todoService.completedTodos(),
   );
 
