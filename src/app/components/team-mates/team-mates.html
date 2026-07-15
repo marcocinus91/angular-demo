@@ -1,1 +1,13 @@
-<p>team-mates works!</p>
+<div class="grid grid-cols-2 gap-4 max-w-2xl">
+    @for (mate of teamMates(); track mate.id) {
+        <div class="flex items-center gap-3 p-4 bg-white rounded-xl border border-gray-200">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center text-white font-semibold" [class]="mate.avatarColor">
+                {{ mate.name.charAt(0) }}
+            </div>
+            <div>
+                <p class="font-medium text-gray-800">{{ mate.name }}</p>
+                <p class="text-sm text-gray-500">{{ mate.role }}</p>
+            </div>
+        </div>
+    }
+</div>

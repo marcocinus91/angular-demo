@@ -13,6 +13,7 @@ export class TodoService {
       date: '10:30 AM - 12:00 PM',
       completed: false,
       color: 'blue',
+      assignedTo: null,
     },
     {
       id: crypto.randomUUID(),
@@ -21,15 +22,16 @@ export class TodoService {
       date: '10:30 AM - 12:00 PM',
       completed: false,
       color: 'purple',
+      assignedTo: null,
     },
   ]);
 
   todos = this.todoSignal.asReadonly();
 
-  activateTodos = computed(() => this.todoSignal().filter((t) => !t.completed));
+  activeTodos = computed(() => this.todoSignal().filter((t) => !t.completed));
   completedTodos = computed(() => this.todoSignal().filter((t) => t.completed));
 
-  add(title: string, description: string, color: TodoColor): void {
+  add(title: string, description: string, color: TodoColor, assignedTo: string | null): void {
     const newTodo: Todo = {
       id: crypto.randomUUID(),
       title,
@@ -37,6 +39,7 @@ export class TodoService {
       date: new Date().toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' }),
       completed: false,
       color,
+      assignedTo: assignedTo,
     };
     this.todoSignal.update((todos) => [...todos, newTodo]);
   }
