@@ -1,13 +1,22 @@
 <app-todo-form />
 
+<div class="flex gap-2 mb-4">
+    <button (click)="setTab('active')" class="px-4 py-1.5 rounded-lg text-sm font-medium"
+        [class.bg-blue-100]="activeTab() === 'active'" [class.text-blue-600]="activeTab() === 'active'"
+        [class.text-gray-500]="activeTab() === 'active'">
+        Active Task
+    </button>
+    <button (click)="setTab('completed')" class="px-4 py-1.5 rounded-lg text-sm font-medium"
+        [class.bg-blue-100]="activeTab() === 'completed'" [class.text-blue-600]="activeTab() === 'completed'"
+        [class.text-gray-500]="activeTab() !== 'completed'">
+        Completed
+    </button>
+</div>
+
 <div class="grid grid-cols-3 gap-4">
-    @for (todo of todos(); track todo.id) {
-        <app-todo-card
-            [todo]="todo"
-            (toggle)="onToggle($event)"
-            (delete)="onDelete($event)"
-        />
+    @for (todo of visibleTodos(); track todo.id) {
+    <app-todo-card [todo]="todo" (toggle)="onToggle($event)" (delete)="onDelete($event)" />
     } @empty {
-        <p class="text-gray-500">Nessun task presente</p>
+    <p class="text-gray-500">Nessun task presente</p>
     }
 </div>
