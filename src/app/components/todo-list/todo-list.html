@@ -1,4 +1,4 @@
-<app-todo-form [editingTodo]="editingTodo()" (closed)="onFormClosed()"/>
+<app-todo-form [editingTodo]="editingTodo()" (closed)="onFormClosed()" />
 <div class="flex items-center justify-between mb-4">
     <div class="flex gap-2 mb-4">
         <button (click)="setTab('active')" class="px-4 py-1.5 rounded-lg text-sm font-medium"
@@ -18,9 +18,13 @@
         class="px-3 py-1.5 border border-gray-300 rounded-lg text-sm w-64" />
 </div>
 
-<div class="grid grid-cols-3 gap-4">
+<div cdkDropList [cdkDropListDisabled]="!canReorder()" (cdkDropListDropped)="onDrop($event)"
+    class="grid grid-cols-3 gap-4">
     @for (todo of visibleTodos(); track todo.id) {
-    <app-todo-card [todo]="todo" (toggle)="onToggle($event)" (delete)="onDelete($event)" (edit)="onEdit(todo)"/>
+    <div cdkDrag [cdkDragDisabled]="!canReorder()">
+        <app-todo-card [todo]="todo" (toggle)="onToggle($event)" (delete)="onDelete($event)" (edit)="onEdit(todo)" />
+    </div>
+
     } @empty {
     <div class="col-span-3 flex flex-col items-center justify-center py-12 text-gray-400">
         <p class="text-gray-500">Nessun task presente</p>

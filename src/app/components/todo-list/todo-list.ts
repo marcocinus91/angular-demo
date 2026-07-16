@@ -3,12 +3,13 @@ import { TodoService } from '../../services/todo.service';
 import { TodoCard } from '../todo-card/todo-card';
 import { TodoForm } from '../todo-form/todo-form';
 import { Todo } from '../../models/todo.model';
+import { DragDropModule, CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 type Tab = 'active' | 'completed';
 
 @Component({
   selector: 'app-todo-list',
-  imports: [TodoCard, TodoForm],
+  imports: [TodoCard, TodoForm, DragDropModule],
   templateUrl: './todo-list.html',
   styleUrl: './todo-list.css',
 })
@@ -35,6 +36,13 @@ export class TodoList {
       (t) => t.title.toLowerCase().includes(query) || t.description.toLowerCase().includes(query),
     );
   });
+
+  canReorder = computed(() => this.activeTab() === 'active' && this.searchQuery().trim() === '');
+
+  onDrop(event: CdkDragDrop<Todo[]>): void {
+    if (!this.canReorder()) return;
+    this.todoService.reorder(event.previousIndex, event.currentIndex);
+  }
 
   setTab(tab: Tab): void {
     this.activeTab.set(tab);

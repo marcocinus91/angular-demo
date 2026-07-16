@@ -95,4 +95,13 @@ export class TodoService {
       todos.map((t) => (t.id === id ? { ...t, completed: !t.completed } : t)),
     );
   }
+
+  reorder(previousIndex: number, currentIndex: number): void {
+    this.todoSignal.update((todos) => {
+      const updated = [...todos];
+      const [moved] = updated.splice(previousIndex, 1);
+      updated.splice(currentIndex, 0, moved);
+      return updated;
+    });
+  }
 }
