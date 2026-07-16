@@ -20,6 +20,7 @@ export class TodoCard {
 
   toggle = output<string>();
   delete = output<string>();
+  edit = output<Todo>();
 
   colorClass = computed(() => COLOR_CLASSES[this.todo().color]);
 
@@ -29,5 +30,9 @@ export class TodoCard {
 
   onDelete(): void {
     this.delete.emit(this.todo().id);
+  }
+
+  onEdit(): void {
+    this.edit.emit(this.todo());
   }
 }

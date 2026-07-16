@@ -74,6 +74,18 @@ export class TodoService {
     this.todoSignal.update((todos) => [...todos, newTodo]);
   }
 
+  update(
+    id: string,
+    title: string,
+    description: string,
+    color: TodoColor,
+    assignedTo: string | null,
+  ) {
+    this.todoSignal.update((todos) =>
+      todos.map((t) => (t.id === id ? { ...t, title, description, color, assignedTo } : t)),
+    );
+  }
+
   remove(id: string): void {
     this.todoSignal.update((todos) => todos.filter((t) => t.id !== id));
   }

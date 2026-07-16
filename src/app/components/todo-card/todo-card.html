@@ -1,11 +1,6 @@
 <div class="p-4 rounded-xl relative" [class]="colorClass()">
     <div class="flex items-center gap-2 mb-2">
-        <input
-            type="checkbox"
-            [checked]="todo().completed"
-            (change)="onToggle()"
-            class="w-4 h-4 rounded"
-        />
+        <input type="checkbox" [checked]="todo().completed" (change)="onToggle()" class="w-4 h-4 rounded" />
         <h3 class="font-semibold text-gray-800" [class.line-through]="todo().completed">
             {{ todo().title }}
         </h3>
@@ -13,5 +8,8 @@
     <p class="text-sm text-gray-600">{{ todo().description }}</p>
     <span class="text-xs text-gray-500 mt-2 block">{{ todo().date }}</span>
 
+    <button (click)="onEdit()" class="absolute top-3 right-9 text-gray-400 hover:text-blue-500 text-sm">
+        ✎
+    </button>
     <button (click)="onDelete()" class="absolute top-3 right-3 text-gray-400 hover:text-red-500 text-sm">x</button>
 </div>

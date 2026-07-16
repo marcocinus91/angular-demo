@@ -2,6 +2,7 @@ import { Component, inject, signal, computed } from '@angular/core';
 import { TodoService } from '../../services/todo.service';
 import { TodoCard } from '../todo-card/todo-card';
 import { TodoForm } from '../todo-form/todo-form';
+import { Todo } from '../../models/todo.model';
 
 type Tab = 'active' | 'completed';
 
@@ -16,6 +17,7 @@ export class TodoList {
 
   activeTab = signal<Tab>('active');
   searchQuery = signal('');
+  editingTodo = signal<Todo | null>(null);
 
   private tabFilteredTodos = computed(() =>
     this.activeTab() === 'active'
@@ -48,5 +50,13 @@ export class TodoList {
 
   onDelete(id: string): void {
     this.todoService.remove(id);
+  }
+
+  onEdit(todo: Todo): void {
+    this.editingTodo.set(todo);
+  }
+
+  onFormClosed(): void {
+    this.editingTodo.set(null);
   }
 }
