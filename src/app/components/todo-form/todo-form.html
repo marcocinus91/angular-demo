@@ -1,50 +1,42 @@
-<div class="mb-6">
+<div class="todo-form-wrap">
     @if (!isOpen) {
-    <button (click)="toggleOpen()"
-        class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700">
-        + Add New List
-    </button>
+    <app-button variant="primary" (click)="toggleOpen()">
+        <app-icon icon name="plus" [size]="16" />
+        Add New List
+    </app-button>
     } @else {
-    <form [formGroup]="form" (ngSubmit)="onSubmit()"
-        class="bg-white p-4 rounded-xl border border-gray-200 flex flex-col gap-3 max-w-md">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="todo-form glass-strong">
 
-        <div>
-            <input formControlName="title" placeholder="Titolo"
-                class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm" />
+        <div class="field">
+            <input formControlName="title" placeholder="Titolo" class="field-input" />
             @if (form.get('title')?.touched && form.get('title')?.invalid) {
-            <span class="text-xs text-red-500">Titolo obbligatorio (min 3 caratteri)</span>
+            <span class="field-error">Titolo obbligatorio (min 3 caratteri)</span>
             }
         </div>
 
-        <div>
-            <textarea formControlName="description" placeholder="Descrizione" rows="2"
-                class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"></textarea>
+        <div class="field">
+            <textarea formControlName="description" placeholder="Descrizione" rows="2" class="field-input"></textarea>
             @if (form.get('description')?.touched && form.get('description')?.invalid) {
-            <span class="text-xs text-red-500">Descrizione obbligatoria</span>
+            <span class="field-error">Descrizione obbligatoria</span>
             }
         </div>
 
-        <select formControlName="color" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm">
+        <select formControlName="color" class="field-input">
             @for (c of colors; track c) {
             <option [value]="c">{{ c }}</option>
             }
         </select>
 
-        <select formControlName="assignedTo" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm">
+        <select formControlName="assignedTo" class="field-input">
             <option [value]="null">Non assegnato</option>
             @for (mate of teamMate(); track mate.id) {
             <option [value]="mate.id">{{ mate.name }}</option>
             }
         </select>
 
-        <div class="flex gap-2">
-            <button type="submit"
-                class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700">
-                Salva
-            </button>
-            <button type="button" (click)="toggleOpen()" class="px-4 py-2 text-gray-600 text-sm">
-                Annulla
-            </button>
+        <div class="form-actions">
+            <app-button type="submit" variant="primary" size="sm">Salva</app-button>
+            <app-button type="button" variant="ghost" size="sm" (click)="toggleOpen()">Annulla</app-button>
         </div>
     </form>
     }

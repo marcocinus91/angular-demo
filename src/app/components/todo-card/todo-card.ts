@@ -1,17 +1,18 @@
 import { Component, computed, input, output } from '@angular/core';
 import { Todo, TodoColor } from '../../models/todo.model';
+import { Icon } from '../ui/icon/icon';
 
 const COLOR_CLASSES: Record<TodoColor, string> = {
-  blue: 'bg-blue-100',
-  purple: 'bg-purple-100',
-  yellow: 'bg-yellow-100',
-  pink: 'bg-pink-100',
-  green: 'bg-green-100',
+  blue: 'todo-card--blue',
+  purple: 'todo-card--purple',
+  yellow: 'todo-card--yellow',
+  pink: 'todo-card--pink',
+  green: 'todo-card--green',
 };
 
 @Component({
   selector: 'app-todo-card',
-  imports: [],
+  imports: [Icon],
   templateUrl: './todo-card.html',
   styleUrl: './todo-card.css',
 })

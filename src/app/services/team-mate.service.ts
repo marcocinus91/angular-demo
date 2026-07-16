@@ -6,10 +6,10 @@ import { TeamMate } from '../models/team-mate.model';
 })
 export class TeamMateService {
   private teamMatesSignal = signal<TeamMate[]>([
-    { id: 'tm-1', name: 'Akash Singh', role: 'Frontend Developer', avatarColor: 'bg-orange-400' },
-    { id: 'tm-2', name: 'Valibhav Kumar', role: 'Backend Developer', avatarColor: 'bg-purple-400' },
-    { id: 'tm-3', name: 'Sarah Foss', role: 'UI/UX Designer', avatarColor: 'bg-green-400' },
-    { id: 'tm-4', name: 'Jess Teller', role: 'Project Manager', avatarColor: 'bg-blue-400' },
+    { id: 'tm-1', name: 'Akash Singh', role: 'Frontend Developer', avatarColor: '#e0956e' },
+    { id: 'tm-2', name: 'Valibhav Kumar', role: 'Backend Developer', avatarColor: '#7c6ee0' },
+    { id: 'tm-3', name: 'Sarah Foss', role: 'UI/UX Designer', avatarColor: '#5fb37a' },
+    { id: 'tm-4', name: 'Jess Teller', role: 'Project Manager', avatarColor: '#5b93d6' },
   ]);
 
   teamMates = this.teamMatesSignal.asReadonly();

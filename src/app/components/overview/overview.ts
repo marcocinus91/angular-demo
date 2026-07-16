@@ -1,10 +1,17 @@
 import { Component, inject, computed } from '@angular/core';
 import { TodoService } from '../../services/todo.service';
 import { TeamMateService } from '../../services/team-mate.service';
+import { Icon, IconName } from '../ui/icon/icon';
+
+interface Stat {
+  label: string;
+  value: number;
+  icon: IconName;
+}
 
 @Component({
   selector: 'app-overview',
-  imports: [],
+  imports: [Icon],
   templateUrl: './overview.html',
   styleUrl: './overview.css',
 })
@@ -22,6 +29,13 @@ export class Overview {
     if (total === 0) return 0;
     return Math.round((this.completedCount() / total) * 100);
   });
+
+  stats = computed<Stat[]>(() => [
+    { label: 'Task totali', value: this.totalTodos(), icon: 'list-checks' },
+    { label: 'Attivi', value: this.activeCount(), icon: 'clock' },
+    { label: 'Completati', value: this.completedCount(), icon: 'circle-check-big' },
+    { label: 'Membri team', value: this.teamCount(), icon: 'users' },
+  ]);
 
   todosByMember = computed(() => {
     const mates = this.teamMateService.teamMates();

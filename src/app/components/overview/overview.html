@@ -1,47 +1,39 @@
-<div class="flex flex-col gap-6">
+<div class="overview">
 
-    <!-- Cards statistiche -->
-    <div class="grid grid-cols-4 gap-4">
-        <div class="p-4 bg-white rounded-xl border border-gray-200">
-            <p class="text-sm text-gray-500">Task totali</p>
-            <p class="text-2xl font-semibold text-gray-500">{{ totalTodos() }}</p>
+    <div class="stats-grid">
+        @for (stat of stats(); track stat.label) {
+        <div class="stat-card glass">
+            <div class="stat-card-top">
+                <span class="stat-label">{{ stat.label }}</span>
+                <span class="stat-icon">
+                    <app-icon [name]="stat.icon" [size]="15" />
+                </span>
+            </div>
+            <span class="stat-value">{{ stat.value }}</span>
         </div>
-        <div class="p-4 bg-white rounded-xl border border-gray-200">
-            <p class="text-sm text-gray-500">Attivi</p>
-            <p class="text-2xl font-semibold text-gray-500">{{ activeCount() }}</p>
+        }
+    </div>
+
+    <div class="panel glass">
+        <div class="progress-header">
+            <span class="progress-label">Completamento</span>
+            <span class="progress-value">{{ completionRate() }}%</span>
         </div>
-        <div class="p-4 bg-white rounded-xl border border-gray-200">
-            <p class="text-sm text-gray-500">Completati</p>
-            <p class="text-2xl font-semibold text-gray-500">{{ completedCount() }}</p>
-        </div>
-        <div class="p-4 bg-white rounded-xl border border-gray-200">
-            <p class="text-sm text-gray-500">Membri team</p>
-            <p class="text-2xl font-semibold text-gray-500">{{ teamCount() }}</p>
+        <div class="progress-track">
+            <div class="progress-fill" [style.width.%]="completionRate()"></div>
         </div>
     </div>
 
-    <!-- Barra di completamento -->
-    <div class="p-4 bg-white rounded-xl border border-gray-200">
-        <div class="flex justify-between text-sm mb-2">
-            <span class="text-gray-600">Completamento</span>
-            <span class="font-medium text-gray-800">{{ completionRate() }}</span>
-        </div>
-        <div class="w-full h-2 bg-gray-100 rounded-full overflow-hidden">
-            <div class="h-full bg-blue-500" [style.width.%]="completionRate()"></div>
-        </div>
-    </div>
-
-    <!-- Task per membro -->
-    <div class="p-4 bg-white rounded-xl border border-gray-200">
-        <p class="text-sm text-gray-500 mb-3">Task assegnati per membro</p>
-        <div class="flex flex-col gap-2">
+    <div class="panel glass">
+        <p class="panel-title">Task assegnati per membro</p>
+        <div class="member-list">
             @for (item of todosByMember(); track item.mate.id) {
-            <div class="flex items-center justify-between text-sm">
-                <span class="text-gray-700">{{ item.mate.name }}</span>
-                <span class="font-medium text-gray-800">{{ item.count }}</span>
+            <div class="member-row">
+                <span class="member-name">{{ item.mate.name }}</span>
+                <span class="member-count">{{ item.count }}</span>
             </div>
             } @empty {
-            <p class="text-sm text-gray-400">Nessun membro nel team</p>
+            <p class="member-empty">Nessun membro nel team</p>
             }
         </div>
     </div>

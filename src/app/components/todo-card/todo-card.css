@@ -1,0 +1,118 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+.todo-card {
+  position: relative;
+  padding: var(--space-5);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--surface-border);
+  backdrop-filter: var(--glass-blur-soft);
+  -webkit-backdrop-filter: var(--glass-blur-soft);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 148px;
+  transition:
+    transform var(--duration-base) var(--ease-out),
+    box-shadow var(--duration-base) var(--ease-out);
+}
+
+.todo-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-3px);
+}
+
+.todo-card--blue {
+  background: var(--pastel-blue-bg);
+  color: var(--pastel-blue-fg);
+}
+.todo-card--purple {
+  background: var(--pastel-purple-bg);
+  color: var(--pastel-purple-fg);
+}
+.todo-card--yellow {
+  background: var(--pastel-yellow-bg);
+  color: var(--pastel-yellow-fg);
+}
+.todo-card--pink {
+  background: var(--pastel-pink-bg);
+  color: var(--pastel-pink-fg);
+}
+.todo-card--green {
+  background: var(--pastel-green-bg);
+  color: var(--pastel-green-fg);
+}
+
+.todo-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.todo-checkbox {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  accent-color: currentColor;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.todo-title {
+  margin: 0;
+  font-size: var(--text-subtitle);
+  font-weight: var(--weight-semibold);
+  color: inherit;
+}
+
+.todo-title--done {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+.todo-description {
+  margin: 0;
+  font-size: var(--text-caption);
+  color: inherit;
+  opacity: 0.8;
+  line-height: 1.5;
+}
+
+.todo-date {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--text-micro);
+  color: inherit;
+  opacity: 0.65;
+}
+
+.todo-actions {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  display: flex;
+  gap: 4px;
+  opacity: 0;
+  transition: opacity var(--duration-fast) var(--ease-standard);
+}
+
+.todo-card:hover .todo-actions {
+  opacity: 1;
+}
+
+.todo-action-btn {
+  width: 26px;
+  height: 26px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+  background: rgba(255, 255, 255, 0.35);
+  border: none;
+}

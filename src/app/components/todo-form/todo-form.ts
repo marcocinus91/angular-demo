@@ -3,10 +3,12 @@ import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { TodoService } from '../../services/todo.service';
 import { TodoColor, Todo } from '../../models/todo.model';
 import { TeamMateService } from '../../services/team-mate.service';
+import { Button } from '../ui/button/button';
+import { Icon } from '../ui/icon/icon';
 
 @Component({
   selector: 'app-todo-form',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, Button, Icon],
   templateUrl: './todo-form.html',
   styleUrl: './todo-form.css',
 })

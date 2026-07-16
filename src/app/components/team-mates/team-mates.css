@@ -1,0 +1,28 @@
+.mates-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+  max-width: var(--content-max-width);
+}
+
+.mate-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: var(--space-5);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.mate-name {
+  margin: 0;
+  font-size: var(--text-body);
+  font-weight: var(--weight-semibold);
+  color: var(--text-primary);
+}
+
+.mate-role {
+  margin: 0;
+  font-size: var(--text-caption);
+  color: var(--text-secondary);
+}

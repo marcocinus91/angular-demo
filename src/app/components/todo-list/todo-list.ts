@@ -4,12 +4,13 @@ import { TodoCard } from '../todo-card/todo-card';
 import { TodoForm } from '../todo-form/todo-form';
 import { Todo } from '../../models/todo.model';
 import { DragDropModule, CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { Icon } from '../ui/icon/icon';
 
 type Tab = 'active' | 'completed';
 
 @Component({
   selector: 'app-todo-list',
-  imports: [TodoCard, TodoForm, DragDropModule],
+  imports: [TodoCard, TodoForm, DragDropModule, Icon],
   templateUrl: './todo-list.html',
   styleUrl: './todo-list.css',
 })

@@ -1,0 +1,9 @@
+<button
+  class="icon-btn"
+  [class.icon-btn--active]="active()"
+  [style.width.px]="size()"
+  [style.height.px]="size()"
+  [attr.title]="title() || null"
+>
+  <ng-content />
+</button>

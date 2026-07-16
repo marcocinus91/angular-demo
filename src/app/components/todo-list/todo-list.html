@@ -1,33 +1,31 @@
 <app-todo-form [editingTodo]="editingTodo()" (closed)="onFormClosed()" />
-<div class="flex items-center justify-between mb-4">
-    <div class="flex gap-2 mb-4">
-        <button (click)="setTab('active')" class="px-4 py-1.5 rounded-lg text-sm font-medium"
-            [class.bg-blue-100]="activeTab() === 'active'" [class.text-blue-600]="activeTab() === 'active'"
-            [class.text-gray-500]="activeTab() === 'active'">
+
+<div class="toolbar">
+    <div class="tabs glass">
+        <button class="tab" [class.tab--active]="activeTab() === 'active'" (click)="setTab('active')">
             Active Task
         </button>
-        <button (click)="setTab('completed')" class="px-4 py-1.5 rounded-lg text-sm font-medium"
-            [class.bg-blue-100]="activeTab() === 'completed'" [class.text-blue-600]="activeTab() === 'completed'"
-            [class.text-gray-500]="activeTab() !== 'completed'">
+        <button class="tab" [class.tab--active]="activeTab() === 'completed'" (click)="setTab('completed')">
             Completed
         </button>
     </div>
 
-    <input type="text" placeholder="Search List" [value]="searchQuery()"
-        (input)="onSearchChange($any($event.target).value)"
-        class="px-3 py-1.5 border border-gray-300 rounded-lg text-sm w-64" />
+    <div class="search-input">
+        <app-icon name="search" [size]="16" />
+        <input type="text" placeholder="Search List" [value]="searchQuery()"
+            (input)="onSearchChange($any($event.target).value)" />
+    </div>
 </div>
 
-<div cdkDropList [cdkDropListDisabled]="!canReorder()" (cdkDropListDropped)="onDrop($event)"
-    class="grid grid-cols-3 gap-4">
+<div cdkDropList [cdkDropListDisabled]="!canReorder()" (cdkDropListDropped)="onDrop($event)" class="todo-grid">
     @for (todo of visibleTodos(); track todo.id) {
     <div cdkDrag [cdkDragDisabled]="!canReorder()">
         <app-todo-card [todo]="todo" (toggle)="onToggle($event)" (delete)="onDelete($event)" (edit)="onEdit(todo)" />
     </div>
-
     } @empty {
-    <div class="col-span-3 flex flex-col items-center justify-center py-12 text-gray-400">
-        <p class="text-gray-500">Nessun task presente</p>
+    <div class="empty-state">
+        <app-icon name="list-checks" [size]="32" />
+        <p>Nessun task presente</p>
     </div>
     }
 </div>

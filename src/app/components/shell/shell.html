@@ -1,44 +1,57 @@
-<div class="flex h-screen bg-gray-100 relative">
-
-  <!-- Overlay scuro su mobile quando la sidebar è aperta -->
+<div class="shell">
   @if (sidebarOpen()) {
-    <div
-      class="fixed inset-0 bg-black/30 z-10 md:hidden"
-      (click)="toggleSidebar()"
-    ></div>
+    <div class="mobile-overlay" (click)="toggleSidebar()"></div>
   }
 
-  <!-- Sidebar -->
-  <aside
-    class="w-64 bg-white border-r border-gray-200 flex flex-col p-4 fixed md:static h-full z-20 transition-transform"
-    [class.max-md:-translate-x-full]="!sidebarOpen()"
-    [class.max-md:translate-x-0]="sidebarOpen()"
-  >
-    <div class="flex items-center gap-2 mb-8">
-      <div class="w-8 h-8 bg-blue-500 rounded-full"></div>
-      <span class="font-semibold text-gray-800">HealDocs</span>
+  <aside class="sidebar glass" [class.sidebar--open]="sidebarOpen()">
+    <div class="brand">
+      <div class="brand-mark"></div>
+      <span class="brand-name">HealDocs</span>
     </div>
 
-    <nav class="flex flex-col gap-1 text-sm text-gray-600">
-      <a routerLink="/overview" routerLinkActive="bg-blue-50 text-blue-600 font-medium" class="px-3 py-2 rounded-lg hover:bg-gray-100">Overview</a>
-      <a routerLink="/team-mates" routerLinkActive="bg-blue-50 text-blue-600 font-medium" class="px-3 py-2 rounded-lg hover:bg-gray-100">Team Mates</a>
-      <a routerLink="/todo-list" routerLinkActive="bg-blue-50 text-blue-600 font-medium" class="px-3 py-2 rounded-lg hover:bg-gray-100">Todo List</a>
+    <nav class="nav">
+      <a routerLink="/overview" routerLinkActive="nav-link--active" class="nav-link">
+        <app-icon name="layout-dashboard" [size]="17" />
+        Overview
+      </a>
+      <a routerLink="/team-mates" routerLinkActive="nav-link--active" class="nav-link">
+        <app-icon name="users" [size]="17" />
+        Team Mates
+      </a>
+      <a routerLink="/todo-list" routerLinkActive="nav-link--active" class="nav-link">
+        <app-icon name="list-checks" [size]="17" />
+        Todo List
+      </a>
     </nav>
   </aside>
 
-  <!-- Main content -->
-  <div class="flex-1 flex flex-col md:ml-0">
-    <header class="flex items-center justify-between px-8 py-4 bg-white border-b border-gray-200">
-      <div class="flex items-center gap-3">
-        <button (click)="toggleSidebar()" class="md:hidden text-gray-600">
-          ☰
-        </button>
-        <h1 class="text-xl font-semibold text-gray-800">Todo List</h1>
+  <div class="content-column">
+    <header class="header glass">
+      <div class="header-left">
+        <app-icon-button class="menu-toggle" title="Menu" (click)="toggleSidebar()">
+          <app-icon name="menu" [size]="18" />
+        </app-icon-button>
+        <h1 class="page-title">{{ pageTitle() }}</h1>
       </div>
-      <div class="w-9 h-9 bg-gray-300 rounded-full"></div>
+      <div class="header-right">
+        <button
+          class="theme-toggle"
+          [class.theme-toggle--dark]="theme() === 'dark'"
+          (click)="toggleTheme()"
+          aria-label="Toggle theme"
+        >
+          <span class="theme-toggle-knob">
+            <app-icon [name]="theme() === 'dark' ? 'moon' : 'sun'" [size]="13" />
+          </span>
+        </button>
+        <app-icon-button title="Notifications">
+          <app-icon name="bell" [size]="17" />
+        </app-icon-button>
+        <app-avatar name="Marco Cinus" [size]="38" />
+      </div>
     </header>
 
-    <main class="flex-1 p-8 overflow-auto">
+    <main class="main">
       <router-outlet />
     </main>
   </div>
